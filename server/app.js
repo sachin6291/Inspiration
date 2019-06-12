@@ -16,7 +16,6 @@ const app_name = require('./package.json').name;
 const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`);
 
 const app = express();
-require('./configs/passport.config')(app);
 
 // Middleware Setup
 app.use(logger('dev'));
@@ -50,15 +49,19 @@ const corsOptions = {
   origin: (origin, cb) => {
     const originIsWhitelisted = whitelist.includes(origin);
     cb(null, originIsWhitelisted)
-  }
+  },
+  credentials: true
 }
 app.use(cors(corsOptions))
+
+require('./configs/passport.config')(app);
+
 
 // const inspirationRoutes = require('./routes/coaster.routes')
 // app.use('/api', inspirationRoutes)
 
-// const projectRoutes = require("./routes/project.routes")
-// api.use("/api", projectRoutes)
+const projectRoutes = require("./routes/project.routes")
+app.use("/api", projectRoutes)
 
 const authRoutes = require('./routes/auth.routes')
 app.use('/api', authRoutes)

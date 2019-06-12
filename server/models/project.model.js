@@ -3,10 +3,15 @@ const Schema = mongoose.Schema;
 
 const projectSchema = new Schema({
   name:String,
+  description: String,
   user:[{
     type:Schema.Types.ObjectId,
     ref: "User"
   }],
+  author:{
+    type:Schema.Types.ObjectId,
+    ref:"User"
+  },
   role: {
     type:[String]
   },
