@@ -6,13 +6,16 @@ const userSchema = new Schema({
   password: String,
   access:{
     type: String,
-    enum:["user", "admin"]
+    enum:["user", "admin"], 
+    default:"user"
   },
   friends:[{
     type:Schema.Types.ObjectId,
+    ref:"User"
   }],
   project:[{
-    type: Schema.Types.ObjectId,    
+    type: Schema.Types.ObjectId,
+    ref:"Project"    
   }],
   field: String,
   level:[{

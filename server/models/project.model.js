@@ -5,7 +5,7 @@ const projectSchema = new Schema({
   name:String,
   user:[{
     type:Schema.Types.ObjectId,
-    ref: "user"
+    ref: "User"
   }],
   role: {
     type:[String]

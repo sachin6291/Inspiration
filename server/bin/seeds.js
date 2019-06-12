@@ -1,4 +1,4 @@
-// Seeds file that remove all users and create 2 new users
+/*// Seeds file that remove all users and create 2 new users
 
 // To execute this seed, run from the root of the project
 // $ node bin/seeds.js
@@ -44,4 +44,4 @@ User.deleteMany()
 .catch(err => {
   mongoose.disconnect()
   throw err
-})
+})*/
