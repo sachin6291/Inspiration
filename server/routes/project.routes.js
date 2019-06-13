@@ -10,6 +10,8 @@ router.get('/allProjects', (req, res)=>{
 })
 router.get('/oneProject/:id', (req, res)=>{
   Project.findById(req.params.id)
+    .populate("user", "username")
+    .populate("author")
     .then(data => res.json(data))
     .catch(err => console.log('Error:', err))
 })
