@@ -15,11 +15,11 @@ class navigation extends Component{
     if(this.props.userInSession){
       return(
         <nav>
-          {this.props.userInSession.username}
+          <p>{this.props.userInSession.username}</p>
           <Link to="/">Home</Link>
-          <Link to="/newProject">newProject</Link>
-          <Link to="/allProject">All Project</Link>
-          <div onClick={this.logout}>Log Out</div>
+          <Link to="/newProject"> NewProject </Link>
+          <Link to="/allProject"> All Project </Link>
+          <span onClick={this.logout}> Log Out </span>
         </nav>
       )
     }
@@ -27,10 +27,10 @@ class navigation extends Component{
       return(
         <nav>
           Invitado
-          <Link to="/">Home</Link>
-          <Link to="/login">Log In</Link>
-          <Link to="/signup">Sign Up</Link>
-          <Link to="/allProject">all Project</Link>
+          <Link to="/"> Home </Link>
+          <Link to="/login"> Log In </Link>
+          <Link to="/signup"> Sign Up </Link>
+          <Link to="/allProject"> All Project </Link>
         </nav>
       )
     }
