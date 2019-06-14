@@ -17,7 +17,7 @@ const userSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref:"Project"    
   }],
-  field: String,
+  role: String,
   level:[{
     type: String,
     enum:["rusty","iron", "bronze", "silver", "gold", "pltinum"],

@@ -12,9 +12,7 @@ const projectSchema = new Schema({
     type:Schema.Types.ObjectId,
     ref:"User"
   },
-  role: {
-    type:[String]
-  },
+  roles: [String],
 }, {
     timestamps: true
   });

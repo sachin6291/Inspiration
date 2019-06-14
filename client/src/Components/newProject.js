@@ -9,10 +9,10 @@ class ProjectAdd extends Component {
       project:{
         name: '',
         description: '',
-        user: '',
-        role: '' 
+        role: [] 
       },
-      redirect: false
+      redirect: false,
+      inputs: 1
     }
 
     this.services = new ProjectServices()
@@ -30,11 +30,42 @@ class ProjectAdd extends Component {
   handleSubmit = e => {
     e.preventDefault()
     this.setState({redirect:true})
-    console.log("handle submit")
     this.services.newProject(this.state.project)
       .then(x=> console.log(x))
   }
+  wInput = (e, index) => {
+    const { value } = e.target;
+    const _project = { ...this.state.project };
+    console.log(_project.role, value, this.state.project)
+    _project.role[index] = value;
+    this.setState({ project: _project })
+  }
 
+  generateInputs = () => {
+    const inputs = [];
+    for (let i = 0; i < this.state.inputs; i++) {
+      inputs.push(<input onChange={(e) => this.wInput(e, i)} value={this.state.project.role[i]} type="text" className="form-control" id="role" name="role" />)
+    }
+    return inputs
+  }
+  addInput = e => {
+    e.preventDefault()
+    let inputCopy = this.state.inputs
+    inputCopy++
+    this.setState({ inputs: inputCopy })
+    this.generateInputs()
+  }
+  removeInput = e => {
+    e.preventDefault()
+    let inputCopy = this.state.inputs
+    const roleCopy = {...this.state.project}
+    if(inputCopy >= 1) {
+      inputCopy--
+      roleCopy.role.pop()
+    }
+    this.setState({ inputs: inputCopy ,project: roleCopy  })
+    this.generateInputs()
+  }
 
   render() {
     if(this.state.redirect){
@@ -53,12 +84,10 @@ class ProjectAdd extends Component {
             <input onChange={this.handlechange} value={this.state.project.description} type="text" className="form-control" id="description" name="description" />
           </div>
           <div className="form-group">
-            <label htmlFor="user">User</label>
-            <input onChange={this.handlechange} value={this.state.project.user} type="text" className="form-control" id="user" name="user" />
-          </div>
-          <div className="form-group">
             <label htmlFor="role">Role</label>
-            <input onChange={this.handlechange} value={this.state.project.role} type="text" className="form-control" id="role" name="role" />
+            {this.generateInputs().map(input => input)}
+            <button onClick={this.addInput}>Add</button>
+            <button onClick={this.removeInput}>Remove</button>            
           </div>
           <button type="submit">Save</button>
         </form>

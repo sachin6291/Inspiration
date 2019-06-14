@@ -37,6 +37,10 @@ export default class services {
       .then(res => res.data)
       .catch(err => console.log(err))
   } 
+  joinProject =(project, id)=>{
+    return this.service.post(`joinProject/${id}`, project)
+      .then(res=>console.log(res))
+  }
 
   // handleUpload = theFile => {
   //   return this.service.post('/upload', theFile)
