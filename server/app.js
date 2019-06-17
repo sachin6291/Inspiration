@@ -66,5 +66,6 @@ app.use("/api", projectRoutes)
 const authRoutes = require('./routes/auth.routes')
 app.use('/api', authRoutes)
       
-
+const fileRoutes = require('./routes/file-upload.routes')
+app.use('/api',fileRoutes)
 module.exports = app;

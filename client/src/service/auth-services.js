@@ -32,4 +32,9 @@ export default class services {
     return this.service.get('/loggedin')
       .then(response => response.data)
   }
+  imgUpload = theImg => {
+    return this.service.post('/upload', theImg)
+      .then(result =>result.data)
+      .catch(err => console.log(err))
+  }
 }

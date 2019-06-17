@@ -7,15 +7,15 @@ const userSchema = new Schema({
   password: String,
   company:String,
   ideas: {
-    type: [String],
+    type: Schema.Types.ObjectId,
     ref: "Project"
   },
   pastProjects:{
-    type: [String],
+    type: Schema.Types.ObjectId,
     ref: "Project"
   },
   currnetProject: {
-    type: String,
+    type: Schema.Types.ObjectId,
     ref: "Project"
   },
   access:{
@@ -32,11 +32,12 @@ const userSchema = new Schema({
     ref:"Project"    
   }],
   role: String,
-  level:[{
+  level:{
     type: String,
     enum:["rusty","iron", "bronze", "silver", "gold", "pltinum"],
     default:"iron"
-  }]
+  },
+  img:String,
 }, {
   timestamps: true
 });

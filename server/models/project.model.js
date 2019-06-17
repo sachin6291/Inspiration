@@ -12,8 +12,21 @@ const projectSchema = new Schema({
     type:Schema.Types.ObjectId,
     ref:"User"
   },
-  roles: [String],
-}, {
+  roles: [{
+    role:String,
+    number:Number
+  }],
+  comments: [{
+    comment: String,
+    commenter: {type: Schema.Types.ObjectId, ref: "User"},
+  }],
+  votes: {
+    votes: Number,
+    voter:[{type : Schema.Types.ObjectId, ref:"User"}]
+  },
+  img:String,
+},
+ {
     timestamps: true
   });
 

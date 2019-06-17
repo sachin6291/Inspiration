@@ -1,6 +1,7 @@
 import React, {Component}from "react"
 import ProjectServices from "../service/project-services"
 import { Redirect } from "react-router-dom"
+//cambiar imagen hecho en el model;
 class ProjectEdit extends Component {
 
   constructor(props) {
