@@ -1,6 +1,10 @@
 import React,{Component} from "react"
 import ProjectServices from "../service/project-services"
 import{Link} from "react-router-dom"
+// imagen
+// quitar id
+// modify roles
+//añadir comentarios
 
 class ProjectDetail extends Component{
   constructor(){
@@ -22,7 +26,7 @@ class ProjectDetail extends Component{
   }
   handleMessage = () =>{
     this.services.joinProject(this.state.project, this.state.project._id)
-    .then(response=> this.setState({msg:response}))
+    .then(response=> this.setState({msg:response.msg}))
     .catch(err=>this.setState({msg:err.response.data.msg}))
   }
   deleteProject=()=>{
@@ -50,11 +54,10 @@ class ProjectDetail extends Component{
         <p>Project Author:  {this.state.project.author.username}</p>
           <Link to={`/projectEdit/${this.state.project._id}`}>Edit</Link>
         <br></br>
-        <Link to="#">Delete</Link>
-        <br></br> 
           {(this.state.msg) ? (<p>{this.state.msg}</p>) : null}
           <button onClick={this.handleMessage}>Join</button>
-
+        <br></br>
+          <button onClick={this.deleteProject}>Delete</button>
         <hr></hr>
         <br></br>
       </div>

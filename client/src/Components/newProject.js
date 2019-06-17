@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import ProjectServices from "../service/project-services"
 import { Redirect } from "react-router-dom"
+// añadir imagenes,
+// rango de share: all, company if in company, friends, personal
 class ProjectAdd extends Component {
 
   constructor() {

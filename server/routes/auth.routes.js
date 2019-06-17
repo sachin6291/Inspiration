@@ -90,7 +90,13 @@ authRoutes.post("/logout", (req, res, next)=>{
     message:"logged out sucessfully"
   })
 })
-
+authRoutes.get("/profile",(req,res,next)=>{
+  if(req.isAuthenticated()){
+    console.log(req.user)
+    res.json(req.user)
+    // esta esto bien?
+  }
+})
 authRoutes.get("/loggedin", (req, res, next)=>{
   if(req.isAuthenticated()){
     res.status(200).json(req.user)

@@ -2,8 +2,22 @@ const mongoose = require('mongoose');
 const Schema   = mongoose.Schema;
 
 const userSchema = new Schema({
+  email:String,
   username: String,
   password: String,
+  company:String,
+  ideas: {
+    type: [String],
+    ref: "Project"
+  },
+  pastProjects:{
+    type: [String],
+    ref: "Project"
+  },
+  currnetProject: {
+    type: String,
+    ref: "Project"
+  },
   access:{
     type: String,
     enum:["user", "admin"], 

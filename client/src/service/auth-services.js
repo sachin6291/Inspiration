@@ -24,7 +24,10 @@ export default class services {
     return this.service.post('/logout', {})
       .then(response => response.data)
   }
-
+  profile= ()=>{
+    return this.service.get('/profile')
+    .then(response=>console.log(response))
+  }
   loggedin = () => {
     return this.service.get('/loggedin')
       .then(response => response.data)

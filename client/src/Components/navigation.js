@@ -19,6 +19,7 @@ class navigation extends Component{
           <Link to="/">Home</Link>
           <Link to="/newProject"> NewProject </Link>
           <Link to="/allProject"> All Project </Link>
+          <Link to="profile">Profile</Link>
           <span onClick={this.logout}> Log Out </span>
         </nav>
       )

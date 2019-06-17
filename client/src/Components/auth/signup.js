@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import AuthServices from '../../service/auth-services'
+// email insted of username
+
 
 class Signup extends Component {
 

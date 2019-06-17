@@ -10,6 +10,7 @@ import NewProject from "./Components/newProject"
 import AllProject from "./Components/allProject"
 import ProjectDetail from './Components/projectDetail';
 import ProjectEdit from "./Components/editProject"
+import Profile from "./Components/auth/profile"
 class App extends Component{
   constructor(props) {
     super(props)
@@ -36,6 +37,7 @@ class App extends Component{
             <Route path="/allProject"exact component={AllProject} />
             <Route path="/projectDetail/:id"component={ProjectDetail} />
             <Route path="/projectEdit/:id"component={ProjectEdit} />
+            <Route path="/profile" exact component={Profile} />
           </Switch>
         </div>
       )
