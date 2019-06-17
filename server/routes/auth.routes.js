@@ -92,7 +92,6 @@ authRoutes.post("/logout", (req, res, next)=>{
 })
 authRoutes.get("/profile",(req,res,next)=>{
   if(req.isAuthenticated()){
-    console.log(req.user)
     res.json(req.user)
     // esta esto bien?
   }
