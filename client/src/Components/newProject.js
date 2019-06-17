@@ -11,8 +11,10 @@ class ProjectAdd extends Component {
       project:{
         name: '',
         description: '',
-        role: [] 
+        role: [{role:'', number:0}],
+        imageUrl: ''
       },
+      id:'',
       redirect: false,
       inputs: 1
     }
@@ -31,22 +33,34 @@ class ProjectAdd extends Component {
 
   handleSubmit = e => {
     e.preventDefault()
-    this.setState({redirect:true})
-    this.services.newProject(this.state.project)
-      .then(x=> console.log(x))
+    return this.services.newProject(this.state.project)
+      .then(x=> this.setState({id: x._id}))
+      .then(x => this.setState({redirect: true}))
   }
+
   wInput = (e, index) => {
-    const { value } = e.target;
+    console.log(e.target.name, e.target.value)
+    
+    const {value} = e.target;
+  
     const _project = { ...this.state.project };
-    console.log(_project.role, value, this.state.project)
-    _project.role[index] = value;
+     _project.role[index].role =value;
     this.setState({ project: _project })
+  }
+  nInput=(e, index)=>{
+    console.log(e.target.name, e.target.value)
+    const{value} =e.target
+    const _project = {...this.state.project}
+    _project.role[index].number = value
+    this.setState({project:_project})
   }
 
   generateInputs = () => {
     const inputs = [];
+    console.log(this.state.project.role[0].role, this.state.project.role[0].number)
     for (let i = 0; i < this.state.inputs; i++) {
-      inputs.push(<input onChange={(e) => this.wInput(e, i)} value={this.state.project.role[i]} type="text" className="form-control" id="role" name="role" />)
+      inputs.push(<input onChange={(e) => this.wInput(e, i)} value={this.state.project.role[i].role} type="text" className="form-control" id="role" name="role" />)
+      inputs.push(<input onChange={(e) => this.nInput(e, i)} value={this.state.project.role[i].number} type="number" id="role" name="number" />)
     }
     return inputs
   }
@@ -68,22 +82,44 @@ class ProjectAdd extends Component {
     this.setState({ inputs: inputCopy ,project: roleCopy  })
     this.generateInputs()
   }
+  imageUpload = e => {
+    const uploadData = new FormData();
+    uploadData.append("imageUrl", e.target.files[0]);
+    this.services.imagenUpload(uploadData)
+      .then(response => {
+        this.setState({
+          project: {
+            ...this.state.project, imageUrl: response.secure_url
+          }
+        })
+      })
+      .catch(err => console.log(err))
+  }
 
   render() {
-    if(this.state.redirect){
-      return <Redirect to="/" />
+    if(this.state.redirect && this.state.id){
+      console.log(this.state.id)
+      return <Redirect to={`/projectDetail/${this.state.id}`} />
     }
     else{
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
+          <div>
+            <img src={(this.state.project.imageUrl?this.state.project.imageUrl:"images/chicken.jpg")}alt=""></img>
+          </div>
           <div className="form-group">
             <label htmlFor="name">Título</label>
             <input onChange={this.handlechange} value={this.state.project.name} type="text" className="form-control" id="name" name="name" />
           </div>
           <div className="form-group">
             <label htmlFor="description">Descripción</label>
-            <input onChange={this.handlechange} value={this.state.project.description} type="text" className="form-control" id="description" name="description" />
+            <textarea onChange={this.handlechange} value={this.state.project.description}  id="description" name="description" cols="40" rows="5"></textarea>
+            {/* <input onChange={this.handlechange} value={this.state.project.description} type="text" className="form-control" id="description" name="description" spellcheck="true" /> */}
+          </div>
+          <div>
+            <label htmlFor="img">Upload Image</label>
+            <input onChange={this.imageUpload} type="file" id="img" name="img" />
           </div>
           <div className="form-group">
             <label htmlFor="role">Role</label>

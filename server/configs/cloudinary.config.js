@@ -23,11 +23,11 @@ var storage2 = cloudinaryStorage({
   folder: 'inspiration/project',
   allowedFormats: ['jpg', 'png'],
   filename: function (req, res, cb) {
-    cb(null, res.originalname);
+    cb(null, res.originalname+new Date());
   }
 });
 
-const uploader = multer({ storage });
-const uploader2 = multer({  storage2 });
+const uploader = multer({storage} );
+const uploader2 = multer({ storage :storage2} );
 
 module.exports = {uploader, uploader2};

@@ -16,9 +16,7 @@ router.get('/oneProject/:id', (req, res)=>{
     .catch(err => console.log('Error:', err))
 })
 router.post('/editProject/:id', (req, res)=>{
-  console.log("hollllllllllllllllllllaaaaaaaaaaaaaaa")
   const{name, description, role} = req.body
-  console.log(role)
   Project.findByIdAndUpdate(req.params.id, 
     {name, description, role}
   )
@@ -31,8 +29,7 @@ router.post("/joinProject/:idProject", (req, res) => {
   .then(project => {
     if(project.role.includes(req.user.role)&& !project.user.includes(req.user._id)){
       project.updateOne({$push:{user:req.user._id}})
-      .then(msg => {
-        console.log(msg);
+      .then(msg => { console.log(msg);
         res.status(200).json({msg:`${req.user.username} joined the project`})
       })
     } else {
@@ -72,20 +69,13 @@ router.post('/deleteProject/:id', (req, res)=>{
 })
 
 router.post('/newProject', (req, res)=>{
-  const { name, description,user, role} = req.body
-  User.find({username: user})
-    .then(found=>{
-      const idUser= found[0]._id
+  console.log(req.body.role[0].role, req.body.role[0].number)
+  const { name, description, role} = req.body
+  role.map(e=>console.log(e.role, e.number))
       Project.create({ name, description, author: req.user._id, role, })
-      .then(project => {
-        Project.findByIdAndUpdate(project._id ,
-          {$push: { user: idUser }}
-        )
-          .then(response=>{
-            res.json(response)
-          })
-      })
-      .catch(err => console.log('Error:', err))})
+      .then(project => res.json(project))
+      .catch(err => console.log('Error:', err))
+    
   
 })
 module.exports = router;

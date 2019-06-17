@@ -36,7 +36,7 @@ class ProjectDetail extends Component{
   }
 
   render(){
-    
+    console.log(this.state.project.roles)
    
    
   
@@ -49,7 +49,13 @@ class ProjectDetail extends Component{
         <p>ID:  {this.state.project._id}</p>
         <p>Project name:  {this.state.project.name}</p>
         <p>User:  {this.state.project.user.map(e => e.username)}</p>
-        <p>User Role:  {this.state.project.role.map(e =>e)}</p>
+        {/* <p>User Role:  {this.state.project.role.role.map(e =>{
+          console.log(e)
+          return e
+          })} and {this.state.project.role.number.map(e=>{
+            console.log(e)
+            return e
+          })}</p> */}
         <p>Project Description:  {this.state.project.description}</p>
         <p>Project Author:  {this.state.project.author.username}</p>
           <Link to={`/projectEdit/${this.state.project._id}`}>Edit</Link>

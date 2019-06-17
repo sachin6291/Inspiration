@@ -43,7 +43,7 @@ export default class services {
   }
 
   imagenUpload = theImg => {
-    return this.service.post('/upload', theImg)
+    return this.service.post('/upload-project', theImg)
       .then(res => res.data)
       .catch(err => console.log(err));
   }
