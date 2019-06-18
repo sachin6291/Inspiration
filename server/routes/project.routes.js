@@ -10,8 +10,8 @@ router.get('/allProjects', (req, res)=>{
 })
 router.get('/oneProject/:id', (req, res)=>{
   Project.findById(req.params.id)
-    .populate("user", "username")
-    .populate("author")
+  .populate('user', 'username role' )
+   .populate("author")
     .then(data => res.json(data))
     .catch(err => console.log('Error:', err))
 })
@@ -67,13 +67,23 @@ router.post('/deleteProject/:id', (req, res)=>{
       }
     })
 })
-
+router.post("/comments/:id",(req,res)=>{
+  let{comments}=req.body
+  comments=comments.filter(e=>e.comment)
+  Project.findByIdAndUpdate(req.params.id, {$push:{comments}})
+  .then(project=>{
+    console.log(project)
+    res.json(project)
+  })
+  .catch(err=>console.log(err))
+})
 router.post('/newProject', (req, res)=>{
-  console.log(req.body.role[0].role, req.body.role[0].number)
-  const { name, description, role} = req.body
-  role.map(e=>console.log(e.role, e.number))
-      Project.create({ name, description, author: req.user._id, role, })
-      .then(project => res.json(project))
+  let { name, description, role, imageUrl} = req.body
+  role = role.filter(e=>e.role && e.number>0)
+  Project.create({ name, description, author: req.user._id, roles: role, imageUrl})
+      .then(project => {
+        console.log(project)
+        res.json(project)})
       .catch(err => console.log('Error:', err))
     
   

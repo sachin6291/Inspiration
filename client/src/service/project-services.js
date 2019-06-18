@@ -41,9 +41,14 @@ export default class services {
     return this.service.post(`joinProject/${id}`, project)
       .then(res=>console.log(res))
   }
+  comments=(project,id)=>{
+    return this.service.post(`comments/${id}`, project)
+    .then(res=>res.data)
+    .catch(err=>console.log(err))
+  }
 
   imagenUpload = theImg => {
-    return this.service.post('/upload-project', theImg)
+    return this.service.post('upload-project', theImg)
       .then(res => res.data)
       .catch(err => console.log(err));
   }

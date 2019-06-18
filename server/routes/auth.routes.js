@@ -96,6 +96,12 @@ authRoutes.get("/profile",(req,res,next)=>{
     // esta esto bien?
   }
 })
+authRoutes.post("/profile", (req,res,next)=>{
+  if(req.isAuthenticated()){
+    res.status(200).json(req.user)
+    // esta esto bien?
+  }
+})
 authRoutes.get("/loggedin", (req, res, next)=>{
   if(req.isAuthenticated()){
     res.status(200).json(req.user)

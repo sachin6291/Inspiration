@@ -1,6 +1,7 @@
 import React,{Component} from "react"
 import ProjectServices from "../service/project-services"
 import{Link} from "react-router-dom"
+import Comment from "./comments"
 // imagen
 // quitar id
 // modify roles
@@ -34,38 +35,65 @@ class ProjectDetail extends Component{
     .then(response=>response)
     .catch(err=>console.log(err))
   }
-
+  roles = () => {
+    if (this.state.project.roles) {
+      if (this.state.project.roles.length) {
+        return this.state.project.roles.map((e,i) => {
+          return <div key={i}><p>{e.role}</p><p> {e.number}</p></div>
+        })
+      } else {
+        return <p>Your project has no needed roles</p>
+      }
+    }
+  }
+  users = () => {
+    if (this.state.project.user) {
+      console.log(this.state.project.user)
+      if (this.state.project.user.length) {
+        return this.state.project.user.map((e,i) => {
+          return <div key={i}><p>{e.username},{e.role}</p></div>
+        })
+      } else {
+        return <p>You dont have any comments</p>
+      }
+    }
+  }  
+  comments = () => {
+    if (this.state.project.comments) {
+      if (this.state.project.comments.length) {
+        return this.state.project.comments.map((e,i) => {
+          return <Comment text={e} user={this.state.project.user}/>
+        })
+      } else {
+        return (<div>
+          <textarea autoComplete="on" autoCapitalize="sentence" placeholder="your comment here" rows="5" col="80" spellCheck="true"></textarea>
+          <p>You dont have any comments</p></div>)
+      }
+    }
+  }
   render(){
-    console.log(this.state.project.roles)
-   
-   
-  
 
     return(
       <React.Fragment>
       {this.state.project.user && this.state.project.author && 
       <div>
         <h1>Details</h1>
+        <img src={(this.state.project.imageUrl) ? this.state.project.imageUrl : "/images/chicken.jpg"} alt="#"></img>
         <p>ID:  {this.state.project._id}</p>
         <p>Project name:  {this.state.project.name}</p>
-        <p>User:  {this.state.project.user.map(e => e.username)}</p>
-        {/* <p>User Role:  {this.state.project.role.role.map(e =>{
-          console.log(e)
-          return e
-          })} and {this.state.project.role.number.map(e=>{
-            console.log(e)
-            return e
-          })}</p> */}
+        <div><p>User:</p>  {this.users()}</div>
+        <div><p>Needed:</p> {this.roles()}</div>
         <p>Project Description:  {this.state.project.description}</p>
         <p>Project Author:  {this.state.project.author.username}</p>
-          <Link to={`/projectEdit/${this.state.project._id}`}>Edit</Link>
+        <Link to={`/projectEdit/${this.state.project._id}`}>Edit</Link>
         <br></br>
-          {(this.state.msg) ? (<p>{this.state.msg}</p>) : null}
-          <button onClick={this.handleMessage}>Join</button>
+        {(this.state.msg) ? (<p>{this.state.msg}</p>) : null}
+        <button onClick={this.handleMessage}>Join</button>
         <br></br>
-          <button onClick={this.deleteProject}>Delete</button>
+        <button onClick={this.deleteProject}>Delete</button>
         <hr></hr>
         <br></br>
+        <div>{this.comments()}</div>
       </div>
       }
       </React.Fragment>

@@ -28,6 +28,10 @@ export default class services {
     return this.service.get('/profile')
     .then(response=>response.data)
   }
+  profileEdit=()=>{
+    return this.service.post('/')
+    .then(response=>response.data)
+  }
   loggedin = () => {
     return this.service.get('/loggedin')
       .then(response => response.data)

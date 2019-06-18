@@ -38,29 +38,28 @@ class ProjectAdd extends Component {
       .then(x => this.setState({redirect: true}))
   }
 
-  wInput = (e, index) => {
-    console.log(e.target.name, e.target.value)
-    
-    const {value} = e.target;
-  
+  wInput = (e, index) => {    
+    const {name, value} = e.target;  
     const _project = { ...this.state.project };
-     _project.role[index].role =value;
+    if(name === "role"){
+      _project.role[index].role =value;
+    }else if(name === "number"){
+      _project.role[index].number = value
+    }
     this.setState({ project: _project })
   }
-  nInput=(e, index)=>{
-    console.log(e.target.name, e.target.value)
-    const{value} =e.target
-    const _project = {...this.state.project}
-    _project.role[index].number = value
-    this.setState({project:_project})
-  }
+  // nInput=(e, index)=>{
+  //   const{value} =e.target
+  //   const _project = {...this.state.project}
+  //   _project.role[index].number = value
+  //   this.setState({project:_project})
+  // }
 
   generateInputs = () => {
     const inputs = [];
-    console.log(this.state.project.role[0].role, this.state.project.role[0].number)
     for (let i = 0; i < this.state.inputs; i++) {
-      inputs.push(<input onChange={(e) => this.wInput(e, i)} value={this.state.project.role[i].role} type="text" className="form-control" id="role" name="role" />)
-      inputs.push(<input onChange={(e) => this.nInput(e, i)} value={this.state.project.role[i].number} type="number" id="role" name="number" />)
+      inputs.push(<input onChange={(e) => this.wInput(e, i)} value={ this.state.project.role[i].role} type="text" className="form-control" id="role" name="role" />)
+      inputs.push(<input onChange={(e) => this.wInput(e, i)} value={ this.state.project.role[i].number} type="number" id="role" name="number" />)
     }
     return inputs
   }
@@ -68,8 +67,11 @@ class ProjectAdd extends Component {
     e.preventDefault()
     let inputCopy = this.state.inputs
     inputCopy++
-    this.setState({ inputs: inputCopy })
-    this.generateInputs()
+
+    const _project = {...this.state.project}
+    _project.role.push({ role: "", number: 0 })
+    this.setState({ inputs: inputCopy, project:_project}, () => console.log(this.state))
+    // this.generateInputs()
   }
   removeInput = e => {
     e.preventDefault()
