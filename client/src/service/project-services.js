@@ -42,7 +42,7 @@ export default class services {
       .then(res=>console.log(res))
   }
   comments=(project,id)=>{
-    return this.service.post(`comments/${id}`, project)
+    return this.service.post(`comments/${id}`, {comments:project})
     .then(res=>res.data)
     .catch(err=>console.log(err))
   }

@@ -8,8 +8,8 @@ import Comment from "./comments"
 //añadir comentarios
 
 class ProjectDetail extends Component{
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.state={ project:{},msg:""}
     this.services = new ProjectServices()
     this.updated = true
@@ -50,6 +50,7 @@ class ProjectDetail extends Component{
     if (this.state.project.user) {
       console.log(this.state.project.user)
       if (this.state.project.user.length) {
+        console.log(this.state.project.user)
         return this.state.project.user.map((e,i) => {
           return <div key={i}><p>{e.username},{e.role}</p></div>
         })
@@ -62,14 +63,22 @@ class ProjectDetail extends Component{
     if (this.state.project.comments) {
       if (this.state.project.comments.length) {
         return this.state.project.comments.map((e,i) => {
-          return <Comment text={e} user={this.state.project.user}/>
+          return (
+           <Comment key={i} comment={e.comment} commenter={e.commenter.username} />
+          )
         })
       } else {
         return (<div>
-          <textarea autoComplete="on" autoCapitalize="sentence" placeholder="your comment here" rows="5" col="80" spellCheck="true"></textarea>
+          <textarea id='textarea' autoComplete="on" autoCapitalize="sentence" placeholder="your comment here" rows="5" col="80" spellCheck="true"></textarea>
+          <button onClick={this.sendComment}>Post Comment</button>
           <p>You dont have any comments</p></div>)
       }
     }
+  }
+  sendComment =(e)=>{
+    console.log(document.querySelector('#textarea').value)
+    this.services.comments(document.querySelector('#textarea').value, this.props.match.params.id)
+    .then(() => console.log("comentario nuevo"))
   }
   render(){
 
@@ -77,9 +86,8 @@ class ProjectDetail extends Component{
       <React.Fragment>
       {this.state.project.user && this.state.project.author && 
       <div>
-        <h1>Details</h1>
+        <h1>{this.state.project.name}</h1>
         <img src={(this.state.project.imageUrl) ? this.state.project.imageUrl : "/images/chicken.jpg"} alt="#"></img>
-        <p>ID:  {this.state.project._id}</p>
         <p>Project name:  {this.state.project.name}</p>
         <div><p>User:</p>  {this.users()}</div>
         <div><p>Needed:</p> {this.roles()}</div>
@@ -93,7 +101,10 @@ class ProjectDetail extends Component{
         <button onClick={this.deleteProject}>Delete</button>
         <hr></hr>
         <br></br>
+        <textarea id='textarea' autoComplete="on" autoCapitalize="sentence" placeholder="your comment here" rows="5" col="80" spellCheck="true"></textarea>
+        <button onClick={this.sendComment}>Post Comment</button>       
         <div>{this.comments()}</div>
+
       </div>
       }
       </React.Fragment>

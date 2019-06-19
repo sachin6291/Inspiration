@@ -4,14 +4,17 @@ nav{
   background: black;
   align-items: center;
   color: white;
+  padding: 4vh 0;
 }
 nav p{
   text-transform: capitalize;
+  margin:0;
   
 }
 nav a{
   text-decoration: none;
-  color: white
+  color: white;
+  font-size: 2vh;
 }
 nav a:hover{
   text-decoration: none;

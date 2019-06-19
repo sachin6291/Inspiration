@@ -44,7 +44,7 @@ class Profile extends Component{
     if (this.state.user.friends) {
       if (this.state.user.friends.length) {
         this.state.user.friends.map(e => {
-          return <p>{e}</p>
+          return <li>{e}</li>
         })
       } else {
         return <p>You dont have friends</p>
@@ -61,7 +61,14 @@ class Profile extends Component{
         <p>ID: {this.state.user._id}</p>
         <p>Access: {this.state.user.access}</p>
         <p>Created: {this.state.user.createdAt}</p>
-        <div><p>Friends:</p> {this.friends()}</div>
+        <div>
+          <p>
+            Friends:
+          </p>
+          <ul>
+            {this.friends()}
+          </ul>
+        </div>
         <button>Add</button><button>Remove</button>
         <div><p>Ideas:</p> {this.ideas()}</div>
         <button>Add</button><button>Remove</button>

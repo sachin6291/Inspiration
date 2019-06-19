@@ -11,8 +11,10 @@ router.get('/allProjects', (req, res)=>{
 router.get('/oneProject/:id', (req, res)=>{
   Project.findById(req.params.id)
   .populate('user', 'username role' )
+  .populate("comments.commenter", "username")
    .populate("author")
-    .then(data => res.json(data))
+    .then(data => {console.log(data)
+      res.json(data)})
     .catch(err => console.log('Error:', err))
 })
 router.post('/editProject/:id', (req, res)=>{
@@ -69,8 +71,11 @@ router.post('/deleteProject/:id', (req, res)=>{
 })
 router.post("/comments/:id",(req,res)=>{
   let{comments}=req.body
-  comments=comments.filter(e=>e.comment)
-  Project.findByIdAndUpdate(req.params.id, {$push:{comments}})
+  const newComments = {
+    comment:comments,
+    commenter:req.user._id
+  }
+  Project.findByIdAndUpdate(req.params.id, { $push: { comments: newComments}})
   .then(project=>{
     console.log(project)
     res.json(project)

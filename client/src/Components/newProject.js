@@ -58,8 +58,8 @@ class ProjectAdd extends Component {
   generateInputs = () => {
     const inputs = [];
     for (let i = 0; i < this.state.inputs; i++) {
-      inputs.push(<input onChange={(e) => this.wInput(e, i)} value={ this.state.project.role[i].role} type="text" className="form-control" id="role" name="role" />)
-      inputs.push(<input onChange={(e) => this.wInput(e, i)} value={ this.state.project.role[i].number} type="number" id="role" name="number" />)
+      inputs.push(<input key={i+1} onChange={(e) => this.wInput(e, i)} value={ this.state.project.role[i].role} type="text" className="form-control" id="role" name="role" />)
+      inputs.push(<input key={-(i+1)} onChange={(e) => this.wInput(e, i)} value={ this.state.project.role[i].number} type="number" id="role" name="number" />)
     }
     return inputs
   }

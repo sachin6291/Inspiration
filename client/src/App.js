@@ -35,7 +35,7 @@ class App extends Component{
             <Route path="/newProject"exact component={NewProject} />
             <Route path="/" exact component={Home} ></Route>
             <Route path="/allProject"exact component={AllProject} />
-            <Route path="/projectDetail/:id"component={ProjectDetail} />
+            <Route path="/projectDetail/:id" render={(props) => <ProjectDetail {...props} userInSession={this.state.loggedInUser} setTheUser={this.setUser}/>} />
             <Route path="/projectEdit/:id"component={ProjectEdit} />
             <Route path="/profile" exact component={Profile} />
           </Switch>
