@@ -59,8 +59,11 @@ class ProjectAdd extends Component {
   generateInputs = () => {
     const inputs = [];
     for (let i = 0; i < this.state.inputs; i++) {
-      inputs.push(<input key={i+1} onChange={(e) => this.wInput(e, i)} value={ this.state.project.role[i].role} type="text" className="form-control" id="role" name="role" />)
-      inputs.push(<input key={-(i+1)} onChange={(e) => this.wInput(e, i)} value={ this.state.project.role[i].number} type="number" id="role" name="number" />)
+      inputs.push(
+        <div className="generateInput">
+          <input key={i+1} onChange={(e) => this.wInput(e, i)} value={ this.state.project.role[i].role} type="text" className="roleTitle" id={`role${i}`} name="role" />
+          <input key={-(i+1)} onChange={(e) => this.wInput(e, i)} value={ this.state.project.role[i].number} type="number" className="roleNumber" id={`roleNum${i}`} name="number" />
+        </div>)
     }
     return inputs
   }
@@ -83,7 +86,7 @@ class ProjectAdd extends Component {
       roleCopy.role.pop()
     }
     this.setState({ inputs: inputCopy ,project: roleCopy  })
-    this.generateInputs()
+    // this.generateInputs()
   }
   imageUpload = e => {
     const uploadData = new FormData();
@@ -107,33 +110,37 @@ class ProjectAdd extends Component {
     else{
     return (
       <div className="add-bg">
-        <form onSubmit={this.handleSubmit}>
-          <div>
-            <img src={(this.state.project.imageUrl?this.state.project.imageUrl:"images/chicken.jpg")}alt=""></img>
-          </div>
-          <div>
-            <div className="form-group">
-              <label htmlFor="name">Título</label>
-              <input onChange={this.handlechange} value={this.state.project.name} type="text" className="form-control" id="name" name="name" />
-            </div>
-            <div className="form-group">
-              <label htmlFor="description">Descripción</label>
-              <textarea onChange={this.handlechange} value={this.state.project.description}  id="description" name="description" cols="40" rows="5"></textarea>
-              {/* <input onChange={this.handlechange} value={this.state.project.description} type="text" className="form-control" id="description" name="description" spellcheck="true" /> */}
-            </div>
+        <div className="add-form">
+          <div className="image">
             <div>
-              <label htmlFor="img">Upload Image</label>
-              <input onChange={this.imageUpload} type="file" id="img" name="img" />
+              <img src={(this.state.project.imageUrl?this.state.project.imageUrl:"images/chicken.jpg")}alt="uploded image" className="project-pic"></img>
             </div>
-            <div className="form-group">
-              <label htmlFor="role">Role</label>
-              {this.generateInputs().map(input => input)}
-              <button onClick={this.addInput}>Add</button>
-              <button onClick={this.removeInput}>Remove</button>            
+            <div className="upload">
+              <label htmlFor="img"><img src="/images/upload.svg" alt="upload image"></img></label>
+              <input onChange={this.imageUpload} type="file" id="img" name="img"/>
             </div>
-            <button type="submit">Save</button>
           </div>
-        </form>
+          <form onSubmit={this.handleSubmit}>
+              <div className="form-group">
+                <label htmlFor="name">Título</label>
+                <input onChange={this.handlechange} value={this.state.project.name} type="text" className="title" id="name" name="name" />
+              </div>
+              <div className="form-group">
+                <label htmlFor="description">Descripción</label>
+                <textarea onChange={this.handlechange} value={this.state.project.description}  id="description" name="description" cols="40" rows="5"></textarea>
+                {/* <input onChange={this.handlechange} value={this.state.project.description} type="text" className="form-control" id="description" name="description" spellcheck="true" /> */}
+              </div>
+              <div className="role">
+                <div>
+                  <label htmlFor="role">Role</label>
+                  {this.generateInputs().map(input => input)}
+                </div>
+                <span onClick={this.addInput}><img src="/images/add.svg" alt="add" className="icon"></img></span>
+                <span onClick={this.removeInput}><img src="/images/remove.svg" alt="remove" className="icon"></img></span>            
+              </div>
+              <button type="submit">Save</button>
+          </form>
+        </div>
       </div>
     )
     }
