@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import AuthServices from '../../service/auth-services'
+import "./auth.scss"
 
 class Login extends Component {
 
   constructor(props) {
     super(props)
-    this.state = { username: '', password: '' }
+    this.state = { email: '', password: '' }
     this.services = new AuthServices()
   }
 
@@ -17,10 +18,10 @@ class Login extends Component {
   handleSubmit = e => {
 
     e.preventDefault()
-    const { username, password } = this.state
-    this.services.login(username, password)
+    const { email, password } = this.state
+    this.services.login(email, password)
       .then(response => {
-        this.setState({ username: '', password: '' })
+        this.setState({ email: '', password: '' })
         this.props.setTheUser(response)
       })
       .catch(error => console.log(error.response.data.message))
@@ -28,13 +29,14 @@ class Login extends Component {
 
   render() {
     return (
-      <div>
+      <div className="auth-bg">
+      <div className="auth">
         <h1>Log in</h1>
 
         <form onSubmit={this.handleSubmit}>
           <div className="form-group">
-            <label htmlFor="username">Username</label>
-            <input onChange={this.handleChange} value={this.state.username} type="text" className="form-control" id="username" name="username" />
+            <label htmlFor="email">Email</label>
+            <input onChange={this.handleChange} value={this.state.email} type="email" className="form-control" id="email" name="email" />
           </div>
           <div className="form-group">
             <label htmlFor="password">Password</label>
@@ -42,6 +44,7 @@ class Login extends Component {
           </div>
           <button type="submit">Log In</button>
         </form>
+      </div>
       </div>
     )
   }

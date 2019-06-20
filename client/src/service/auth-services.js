@@ -10,13 +10,13 @@ export default class services {
     })
   }
 
-  signup = (username, password) => {
-    return this.service.post('/signup', { username, password })
+  signup = (email,username, password) => {
+    return this.service.post('/signup', { email, username, password })
       .then(response => response.data)
   }
 
-  login = (username, password) => {
-    return this.service.post('/login', { username, password })
+  login = (email, password) => {
+    return this.service.post('/login', { email, password })
       .then(response => response.data)
   }
 

@@ -9,11 +9,12 @@ const bcryptSalt = 15;
 
 authRoutes.post('/signup', (req, res, next)=>{
   const username = req.body.username;
+  const email = req.body.email;
   const password = req.body.password;
   
   //si teienes los campos vacios
-  if(!username || !password){
-    res.status(400).json({message: "Provide username and password"})
+  if(!username || !password || !email){
+    res.status(400).json({message: "Provide username, email and password"})
     return
   }
   //para pedir que longitud minima de password sea 4
@@ -21,16 +22,16 @@ authRoutes.post('/signup', (req, res, next)=>{
     res.status(400).json({message: "Password must be at least 4 characters long"})
     return
   }
-  // comporbante de username
-  User.findOne({ username}, (err, foundUser) => {
+  // comporbante de email
+  User.findOne({email}, (err, foundUser) => {
     // error al connecion
     if(err){
-      res.status(500).json({ message: "Error could not check username availability"})
+      res.status(500).json({ message: "Error could not check email availability"})
       return
     }
     // existe usuario con ese nombre
     if(foundUser){
-      res.status(400).json({ message: "username is already in use, try another username"})
+      res.status(400).json({ message: "email already in use, you are already registerd, try logging in"})
       return
     }
     const salt = bcrypt.genSaltSync(bcryptSalt);
@@ -38,6 +39,7 @@ authRoutes.post('/signup', (req, res, next)=>{
     
     const newUser = new User({
       //username : username es redundante
+      email,
       username ,
       password : hashPass
     }) 

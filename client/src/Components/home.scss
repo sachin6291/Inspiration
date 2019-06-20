@@ -1,0 +1,122 @@
+.bg{
+  color: rgb(50,50,50);
+  font-family: "Montserrat",sans-serif;
+  font-weight: 200;
+  font-size: 0.9em;
+  h1{
+    font-family: 'Dancing Script', cursive;
+    font-weight: 400;
+    font-size:6em;
+    border-right: solid;
+    width: 22vw;
+    margin-top: 0px;
+    padding: 40vh 0 0 5vw;
+    color: white;
+  }
+  p{
+    font-weight:400; 
+  }
+}
+.transition1{
+background-color: #323232;
+text-align: center;
+padding: 1vh 0;
+display: flex;
+flex-direction: column;
+justify-content: space-around;
+height: 110px;
+font-size:1.5em; 
+  p{
+  color: white;
+  font-weight: 400;
+  margin:0;
+ }
+ a{
+    text-decoration: none;
+    background-color: white;
+    padding: 5px 20px;
+    width: 5em;
+    margin: 0 auto;
+   &:hover{
+     text-decoration: none;
+   }
+ } 
+
+}
+main{
+  background-image: url("/images/hanging light.jpg");
+  height: 90vh;
+  max-width:100vw;
+  width: 100%;
+  background-size:  cover;
+  box-sizing: border-box;
+}
+
+.share, .make, .get, .crazy, .turn{
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.share{
+  background: rgb(255,255,255);
+  display: flex;
+  justify-content: space-between;
+  .text-div{
+    margin-left: 2em; 
+  }
+  img{
+    height:100%;
+  }
+}
+.make{
+  background: rgb(33,33,33);
+  color:rgba(255,255,255,.77);
+  display: flex;
+  justify-content: space-between;
+  .text-div{
+    margin-right: 4em;
+    font-size: 1.5em;
+    text-align: right;
+  }
+  img{
+    height:100%;
+  }
+}
+.get{
+  background: rgb(255,255,255);
+    display: flex;
+  justify-content: space-between;
+  img{
+    height:100%;
+  }
+  .text-div{
+    margin-left: 2em;
+    font-size: 1.5em;
+  }
+}
+.crazy{
+  display:flex;
+  justify-content: space-between;
+  background: rgb(0,0,0);
+  img{
+    height:100%;
+  }
+  .text-div{
+    color:rgba(255,255,255,.77);
+    text-align: right;
+    font-size: 1.5em;
+    margin-right: 1em;
+  }
+}
+.turn{
+  background: rgb(255,255,255);
+  display: flex;
+  justify-content: space-between;
+  img{
+    height:100%;
+  }
+  .text-div{
+    margin-left: 1em;    
+  }
+}

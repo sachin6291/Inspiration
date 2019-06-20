@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ProjectServices from "../service/project-services"
 import { Redirect } from "react-router-dom"
+import "./newProject.scss"
 // añadir imagenes,
 // rango de share: all, company if in company, friends, personal
 class ProjectAdd extends Component {
@@ -105,31 +106,33 @@ class ProjectAdd extends Component {
     }
     else{
     return (
-      <div>
+      <div className="add-bg">
         <form onSubmit={this.handleSubmit}>
           <div>
             <img src={(this.state.project.imageUrl?this.state.project.imageUrl:"images/chicken.jpg")}alt=""></img>
           </div>
-          <div className="form-group">
-            <label htmlFor="name">Título</label>
-            <input onChange={this.handlechange} value={this.state.project.name} type="text" className="form-control" id="name" name="name" />
-          </div>
-          <div className="form-group">
-            <label htmlFor="description">Descripción</label>
-            <textarea onChange={this.handlechange} value={this.state.project.description}  id="description" name="description" cols="40" rows="5"></textarea>
-            {/* <input onChange={this.handlechange} value={this.state.project.description} type="text" className="form-control" id="description" name="description" spellcheck="true" /> */}
-          </div>
           <div>
-            <label htmlFor="img">Upload Image</label>
-            <input onChange={this.imageUpload} type="file" id="img" name="img" />
+            <div className="form-group">
+              <label htmlFor="name">Título</label>
+              <input onChange={this.handlechange} value={this.state.project.name} type="text" className="form-control" id="name" name="name" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="description">Descripción</label>
+              <textarea onChange={this.handlechange} value={this.state.project.description}  id="description" name="description" cols="40" rows="5"></textarea>
+              {/* <input onChange={this.handlechange} value={this.state.project.description} type="text" className="form-control" id="description" name="description" spellcheck="true" /> */}
+            </div>
+            <div>
+              <label htmlFor="img">Upload Image</label>
+              <input onChange={this.imageUpload} type="file" id="img" name="img" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="role">Role</label>
+              {this.generateInputs().map(input => input)}
+              <button onClick={this.addInput}>Add</button>
+              <button onClick={this.removeInput}>Remove</button>            
+            </div>
+            <button type="submit">Save</button>
           </div>
-          <div className="form-group">
-            <label htmlFor="role">Role</label>
-            {this.generateInputs().map(input => input)}
-            <button onClick={this.addInput}>Add</button>
-            <button onClick={this.removeInput}>Remove</button>            
-          </div>
-          <button type="submit">Save</button>
         </form>
       </div>
     )
