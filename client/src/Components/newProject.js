@@ -104,7 +104,6 @@ class ProjectAdd extends Component {
 
   render() {
     if(this.state.redirect && this.state.id){
-      console.log(this.state.id)
       return <Redirect to={`/projectDetail/${this.state.id}`} />
     }
     else{
