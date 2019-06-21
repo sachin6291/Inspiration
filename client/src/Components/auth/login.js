@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import AuthServices from '../../service/auth-services'
+import { Redirect } from "react-router-dom";
 import "./auth.scss"
 
 class Login extends Component {
@@ -21,13 +22,16 @@ class Login extends Component {
     const { email, password } = this.state
     this.services.login(email, password)
       .then(response => {
-        this.setState({ email: '', password: '' })
+        this.setState({ email: '', password: '', redirect: true })
         this.props.setTheUser(response)
       })
       .catch(error => console.log(error.response.data.message))
   }
 
   render() {
+    if (this.state.redirect) {
+      return <Redirect to="/profile" />
+    }
     return (
       <div className="auth-bg">
       <div className="auth">

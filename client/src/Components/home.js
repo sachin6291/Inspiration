@@ -58,10 +58,10 @@ const home = () => {
         <img src="/images/crazy2.jpg" alt=""></img>
         <div className="text-div">
           <div>
-            <h2>Crazy idea? crazy good or just plain carzy</h2>
+            <h2>Crazy idea? Crazy good or just plain carzy</h2>
           </div>
           <div>
-            <p>it doesn't matter, one man's trash can be another man's tresure, a crazy idea can lead to a chain of thoughts that can end in someting awe inspireing</p>
+            <p>It doesn't matter, one man's trash can be another man's tresure, a crazy idea can lead to a chain of thoughts that can end in someting awe inspireing</p>
           </div>
         </div>
       </section>

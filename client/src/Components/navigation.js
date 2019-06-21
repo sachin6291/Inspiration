@@ -15,23 +15,31 @@ class navigation extends Component{
     if(this.props.userInSession){
       return(
         <nav>
-          <p>{this.props.userInSession.username}</p>
-          <Link to="/">Home</Link>
+          <div className="logo">
+          <Link to="/" >Inspiration</Link>
+          </div>
+          <div className="nav">
           <Link to="/newProject"> NewProject </Link>
           <Link to="/allProject"> All Project </Link>
-          <Link to="profile">Profile</Link>
+            <Link to="profile">Hello {this.props.userInSession.username}!</Link>
+          {/* <p></p> */}
           <span onClick={this.logout}> Log Out </span>
+          </div>
         </nav>
       )
     }
     else{
       return(
         <nav>
-          Invitado
-          <Link to="/"> Home </Link>
+          <div className="logo">
+          <Link to="/">Inspiration</Link>
+          </div>
+          <div className="nav">
+            <span>Hello Guest!</span>
+          <Link to="/allProject"> All Project </Link>
           <Link to="/login"> Log In </Link>
           <Link to="/signup"> Sign Up </Link>
-          <Link to="/allProject"> All Project </Link>
+          </div>
         </nav>
       )
     }

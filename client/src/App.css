@@ -1,21 +1,44 @@
 nav{
   display: flex;
+
   justify-content: space-evenly;
   background: black;
   align-items: center;
   color: white;
-  padding: 4vh 0;
+  padding: 1vh 0;
+}
+.nav{
+  display:flex;
+  justify-content: space-between;
+  width:45em
 }
 nav p{
   text-transform: capitalize;
   margin:0;
   
 }
-nav a{
+.nav a{
   text-decoration: none;
   color: white;
   font-size: 2vh;
 }
-nav a:hover{
+.nav a:hover{
   text-decoration: none;
+}
+.logo{
+  font-family: 'Dancing Script', cursive;
+  font-weight: 400;
+}
+.logo a{
+  text-decoration: none;
+  color: white;
+  font-size: 6vh;
+}
+.logo a:hover{
+  text-decoration: none;
+}
+footer{
+  text-align: center;
+  color: rgba(255,255,255,0.85);
+  background-color: rgb(20,20,20);
 }

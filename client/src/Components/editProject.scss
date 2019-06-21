@@ -1,0 +1,58 @@
+.edit-wraper{
+  display: flex;
+  justify-content: center;
+  background-color: rgb(40,40,40);
+  min-height:90vh;
+  font-family: "Montserrat",sans-serif;
+  label{
+    margin-top: 1em;
+  }
+}
+.edit-bg{
+  display:flex;
+  flex-direction: column; 
+  background-color: rgba(255,255,255,0.9);
+  width: 60%;
+  h1{
+    font-family: "Montserrat",sans-serif;
+    font-weight: 200;
+    margin-left: 1em;
+  }
+}
+.form-text{
+  display: flex;
+  flex-direction: column;
+  textarea{
+    font-family: "Montserrat",sans-serif;
+    font-weight: 400;
+    font-size: 1.2em;
+    min-height: 6em;
+    margin-bottom: 1em;
+  }
+}
+.form-title{
+  width: 26em;
+}
+.edit-form{
+  display: flex;
+  flex-direction: column;
+  padding: 3em;
+  height: 50vh;
+  button{
+    width:6em;
+  }
+}
+.form-align{
+  min-height: 62vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.role-group{
+  label{
+    margin-top: 1em
+  }
+  .generateInput{
+    margin-top: 1.2em;
+  }
+}

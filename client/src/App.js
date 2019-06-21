@@ -11,6 +11,7 @@ import AllProject from "./Components/allProject"
 import ProjectDetail from './Components/projectDetail';
 import ProjectEdit from "./Components/editProject"
 import Profile from "./Components/auth/profile"
+import ChangeRole from "./Components/auth/changeRole"
 class App extends Component{
   constructor(props) {
     super(props)
@@ -38,7 +39,10 @@ class App extends Component{
             <Route path="/projectDetail/:id" render={(props) => <ProjectDetail {...props} userInSession={this.state.loggedInUser} setTheUser={this.setUser}/>} />
             <Route path="/projectEdit/:id"component={ProjectEdit} />
             <Route path="/profile" exact component={Profile} />
+            <Route path="/profileEdit" exact component={ChangeRole} />
           </Switch>
+          <footer>Inspiration &copy; by Sachin Tekchandani Pursnani. Big thanks to German, Gabriel and David for their help</footer>
+
         </div>
       )
     } else {
@@ -51,6 +55,7 @@ class App extends Component{
             <Route path="/login" render={() => <Login setTheUser={this.setUser} />} />
             <Route path="/allProject" exact component={AllProject} />
           </Switch>
+          <footer>Inspiration &copy; by Sachin Tekchandani Pursnani. Big thanks to German, Gabriel and David for their help</footer>
         </div>
       )
     }

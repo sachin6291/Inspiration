@@ -5,6 +5,7 @@ const Project =require("../models/project.model");
 
 router.get('/allProjects', (req, res)=>{
   Project.find()
+    .populate('author', "username")
     .then(data => res.json(data))
     .catch(err => console.log('Error:', err))
 })

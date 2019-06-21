@@ -6,13 +6,14 @@
 // past projects
 import React, {Component}from 'react'
 import AuthService from '../../service/auth-services'
-
+import { Redirect } from "react-router-dom"
 import "./profile.scss"
 class Profile extends Component{
   constructor(){
     super()
     this.state={
-      user:{}
+      user:{},
+      redirect:false
     }
     this.services= new AuthService()
   }
@@ -66,9 +67,18 @@ class Profile extends Component{
       })
       .catch(err => console.log(err))
   }
+  roleChange = e =>{
+    e.preventDefault()
+    this.setState({
+      redirect:true
+    })
+  }
   render(){
     console.log(this.state.user.imageUrl)
     this.pastProjects()
+    if(this.state.redirect){
+     return <Redirect to="/profileEdit"/>
+    }else{
     return(
       <div className="profile-wraper">
       <div className="profile-bg">
@@ -95,14 +105,14 @@ class Profile extends Component{
             <div><p className="underline">Past Projects:</p> {this.pastProjects()}</div>
             <p className="underline">Current Projects:</p><p className="bigger"> {this.state.user.currnetProject}</p>
             <p className="underline">Role: </p><p>{(this.state.user.role) ? this.state.user.role : `You have not established a role yet`}</p>
-          <button>Change Role</button>
+          <button onClick={this.roleChange}>Change Role</button>
             <p className=" underline">Updated At: {this.state.user.updatedAt}</p>
             <p className="underline">Created: {this.state.user.createdAt}</p>
           <button>Change Password</button>
         </div>
       </div>
       </div>
-    )
+    )}
   }
 }
 

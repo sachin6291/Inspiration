@@ -28,8 +28,8 @@ export default class services {
     return this.service.get('/profile')
     .then(response=>response.data)
   }
-  profileEdit=()=>{
-    return this.service.post('/')
+  profileEdit=(user)=>{
+    return this.service.post('/profileEdit', user)
     .then(response=>response.data)
   }
   loggedin = () => {

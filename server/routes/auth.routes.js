@@ -98,11 +98,13 @@ authRoutes.get("/profile",(req,res,next)=>{
     // esta esto bien?
   }
 })
-authRoutes.post("/profile", (req,res,next)=>{
-  if(req.isAuthenticated()){
-    res.status(200).json(req.user)
-    // esta esto bien?
-  }
+authRoutes.post("/profileEdit", (req,res,next)=>{
+    const {role} = req.body;
+    User.findByIdAndUpdate(req.user._id, {role}, {new:true})
+    .then((user)=> {
+      console.log(user)
+      res.status(200).json(user)
+    })
 })
 authRoutes.get("/loggedin", (req, res, next)=>{
   if(req.isAuthenticated()){
