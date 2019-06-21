@@ -37,7 +37,7 @@ export default class services {
       .then(response => response.data)
   }
   imgUpload = theImg => {
-    return this.service.post('/upload', theImg)
+    return this.service.post('/upload-user', theImg)
       .then(result =>result.data)
       .catch(err => console.log(err))
   }

@@ -6,6 +6,8 @@
 // past projects
 import React, {Component}from 'react'
 import AuthService from '../../service/auth-services'
+
+import "./profile.scss"
 class Profile extends Component{
   constructor(){
     super()
@@ -22,10 +24,10 @@ class Profile extends Component{
     if(this.state.user.ideas){
       if(this.state.user.ideas.length){
         this.state.user.ideas.map(e=>{
-          return <p>{e}</p>
+          return <p className="bigger">{e}</p>
         })
       }else{
-        return <p>None</p>
+        return <p  className="bigger">None</p>
       }
     }
   }
@@ -33,10 +35,10 @@ class Profile extends Component{
     if (this.state.user.pastProjects) {
       if (this.state.user.pastProjects.length) {
         this.state.user.pastProjects.map(e => {
-          return <p>{e}</p>
+          return <p className="bigger">{e}</p>
         })
       } else {
-        return <p>No Projects Done</p>
+        return <p className="bigger">No Projects Done</p>
       }
     }
   }
@@ -51,35 +53,54 @@ class Profile extends Component{
       }
     }
   }
+  imagenUpload = e => {
+    const uploadData = new FormData();
+    uploadData.append("imageUrl", e.target.files[0]);
+    this.services.imgUpload(uploadData)
+      .then(response => {
+        this.setState({
+          user: {
+            ...this.state.user, imageUrl: response.secure_url
+          }
+        })
+      })
+      .catch(err => console.log(err))
+  }
   render(){
+    console.log(this.state.user.imageUrl)
     this.pastProjects()
     return(
-      <div>
-        <h2>Hola {this.state.user.username}</h2>
-        <img src={(this.state.user.imageUrl) ? this.state.user.imageUrl : "images/chicken.jpg"} alt={(this.state.user.imageUrl) ? "profile picture" : "user is a chicken"}></img>
-        <button>Change Image</button>
-        <p>ID: {this.state.user._id}</p>
-        <p>Access: {this.state.user.access}</p>
-        <p>Created: {this.state.user.createdAt}</p>
-        <div>
+      <div className="profile-wraper">
+      <div className="profile-bg">
+          <h1>Hello <span className="bold">{this.state.user.username}</span></h1>
+        <div className="profile-img">
+          <img className="user-img" src={(this.state.user.imageUrl) ? this.state.user.imageUrl : "images/chicken.jpg"} alt={(this.state.user.imageUrl) ? "profile picture" : "user is a chicken"}></img>
+          <label htmlFor="img"><img src="/images/upload.svg" alt="upload image"></img></label>
+          <input onChange={this.imagenUpload} type="file" id="img" name="img" />
+        </div>
+        {/* <div>
           <p>
-            Friends:
+          Friends:
           </p>
           <ul>
-            {this.friends()}
+          {this.friends()}
           </ul>
+          </div>
+        <button>Add</button><button>Remove</button> */}
+        <div className="profile-text">
+          <div><p className="underline">Ideas:</p> {this.ideas()}</div>
+          <span><img src="/images/add.svg"></img></span><span><img src="/images/remove.svg"></img></span>
+            <p className="underline">Level:</p> <p className="bigger"> {this.state.user.level}</p>
+
+            <div><p className="underline">Past Projects:</p> {this.pastProjects()}</div>
+            <p className="underline">Current Projects:</p><p className="bigger"> {this.state.user.currnetProject}</p>
+            <p className="underline">Role: </p><p>{(this.state.user.role) ? this.state.user.role : `You have not established a role yet`}</p>
+          <button>Change Role</button>
+            <p className=" underline">Updated At: {this.state.user.updatedAt}</p>
+            <p className="underline">Created: {this.state.user.createdAt}</p>
+          <button>Change Password</button>
         </div>
-        <button>Add</button><button>Remove</button>
-        <div><p>Ideas:</p> {this.ideas()}</div>
-        <button>Add</button><button>Remove</button>
-        <p>Level: {this.state.user.level}</p>
-        <p>Password: {this.state.user.password}</p>
-        <button>Change Password</button>
-        <div><p>Past Projects:</p> {this.pastProjects()}</div>
-        <p>Current Projects: {this.state.user.currnetProject}</p>
-        <p>Role: {this.state.user.role}</p>
-        <button>Change Role</button>
-        <p>Updated At: {this.state.user.updatedAt}</p>
+      </div>
       </div>
     )
   }

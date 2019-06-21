@@ -1,0 +1,62 @@
+  // font-family: "Montserrat",sans-serif;
+  // font-weight: 200;
+  .profile-wraper{
+    display:flex;
+    justify-content: center;
+    background-color: rgb(40,40,40)
+  }
+  .profile-bg{
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    background-color: rgba(255,255,255,0.9);
+    font-family: "Montserrat",sans-serif;
+    font-weight: 400;
+    h1{
+      font-family: "Montserrat",sans-serif;
+      font-weight: 200;
+      margin-left: 1em;
+    }
+  }
+  .profile-img{
+      display: flex;
+      align-items: end;
+      width: 450px;
+      justify-content: space-around;
+    .user-img{
+      min-width: 200px;
+      max-width: 200px;
+      min-height: 250px;
+      max-height: 250px;
+    }
+    input{
+      width: 0.1px;
+      height: 0.1px;
+      opacity: 0;
+      overflow: hidden;
+      position: absolute;
+      z-index: -1;
+    }
+    label{
+      img{
+        height: 2.5em;
+      }
+    }
+  }
+  .profile-text{
+    padding:1em;
+    img{
+      height:2em;
+      margin-right: 1.3em;
+    }
+  }
+  .bigger{
+    font-size: 1.2em;
+  }
+  .underline{
+    font-size: .9em;
+    text-decoration: underline;
+  }
+  .bold{
+    font-weight: bolder
+  }

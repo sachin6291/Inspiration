@@ -18,9 +18,9 @@ router.get('/oneProject/:id', (req, res)=>{
     .catch(err => console.log('Error:', err))
 })
 router.post('/editProject/:id', (req, res)=>{
-  const{name, description, role} = req.body
+  const{name, description, roles} = req.body
   Project.findByIdAndUpdate(req.params.id, 
-    {name, description, role}
+    {name, description, roles}, {new:true}
   )
     .then(data => res.json(data))
     .catch(err => console.log('Error:', err))
@@ -75,7 +75,8 @@ router.post("/comments/:id",(req,res)=>{
     comment:comments,
     commenter:req.user._id
   }
-  Project.findByIdAndUpdate(req.params.id, { $push: { comments: newComments}})
+  Project.findByIdAndUpdate(req.params.id, { $push: { comments: newComments}}, {new:true})
+    .populate("comments.commenter")
   .then(project=>{
     console.log(project)
     res.json(project)
@@ -83,9 +84,9 @@ router.post("/comments/:id",(req,res)=>{
   .catch(err=>console.log(err))
 })
 router.post('/newProject', (req, res)=>{
-  let { name, description, role, imageUrl} = req.body
+  let { name, description, roles, imageUrl} = req.body
   role = role.filter(e=>e.role && e.number>0)
-  Project.create({ name, description, author: req.user._id, roles: role, imageUrl})
+  Project.create({ name, description, author: req.user._id, roles, imageUrl})
       .then(project => {
         console.log(project)
         res.json(project)})

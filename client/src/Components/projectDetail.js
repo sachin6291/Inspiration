@@ -17,7 +17,9 @@ class ProjectDetail extends Component{
   }
   componentDidMount(){
     this.services.oneProject(this.props.match.params.id)
-      .then(theProject=> this.setState({project: theProject}))
+      .then(theProject=>{
+        console.log(theProject)
+        this.setState({project: theProject})})
   }
 
   componentDidUpdate(){
@@ -77,12 +79,12 @@ class ProjectDetail extends Component{
     console.log(document.querySelector('#textarea').value)
     this.services.comments(document.querySelector('#textarea').value, this.props.match.params.id)
     .then(response => {
-      console.log(response)
+      const _project = {...this.state.project};
+      _project.comments = (response.comments)
       this.setState({
-        project: {
-          ...this.state.project, comments: response.comments
-        }
+        project: _project 
       })
+      document.querySelector('#textarea').value = ""
     })
   }
   render(){
